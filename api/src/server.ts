@@ -1,17 +1,13 @@
 import { fastify } from "fastify";
 import { prisma } from "./lib/prisma";
+import { getAllPromptsRoot } from "./routes/get-all-prompts";
 
 const app = fastify();
 
-app.get("/prompts", async () => {
-  const prompts = await prisma.prompt.findMany({
-    
-  })
-  return "Hello world!";
-});
+app.register(getAllPromptsRoot);
 
 app
   .listen({
     port: 3333,
   })
-  .then(() => "HTTP SERVER RUNNING");
+  .then(() => console.log("HTTP SERVER RUNNING ON http://localhost:3333"));
